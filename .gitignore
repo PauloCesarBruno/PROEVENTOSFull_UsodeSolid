@@ -500,3 +500,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#Excluindo DB do Git
+*.db
+*.db-shm
+*.db-wal
