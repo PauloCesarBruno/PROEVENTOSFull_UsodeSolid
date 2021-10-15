@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  isCollapsed = true;
+  isCollapsed = true; // Retirado da documentação do ngx-bootstrap/collapse.
   constructor() { }
 
   ngOnInit() {
