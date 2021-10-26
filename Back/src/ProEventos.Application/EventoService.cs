@@ -34,7 +34,7 @@ namespace ProEventos.Application
             }
         }
 
-        public async Task<Evento> UpdateEvento(int eventoId, Evento model)
+        public async Task<Evento> UpdateEventos(int eventoId, Evento model)
         {
             try
             {
@@ -119,6 +119,6 @@ namespace ProEventos.Application
             {                
                  throw new Exception (ex.Message);
             }
-        }
+        }        
     }
 }

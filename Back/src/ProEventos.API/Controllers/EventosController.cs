@@ -95,7 +95,7 @@ namespace ProEventos.API.Controllers
         {
             try
             {
-                var evento = await _eventoService.UpdateEvento(Id, model);
+                var evento = await _eventoService.UpdateEventos(Id, model);
                 if (evento == null) return BadRequest("Erro ao tentar alterar evento !");
 
                 return Ok(evento);
