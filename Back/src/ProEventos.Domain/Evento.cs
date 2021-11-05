@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 
 namespace ProEventos.Domain
-{
+{    // Data Anotation de EF.Core para diferenciar meu codigo da Tabela do Banco de Dados, caso tenham nome diferentes.
+    //[Table("EventosDetalhes")] 
     public class Evento
-    {
+    {       
         public int Id { get; set; }
         public string Local { get; set; }
         public DateTime? DataEvento { get; set; }
