@@ -1,16 +1,17 @@
 using System.Threading.Tasks;
+using ProEventos.Application.Dtos;
 using ProEventos.Domain;
 
 namespace ProEventos.Application.Contratos
 {
     public interface IPalestranteService
     {
-        Task<Palestrante> AddPalestrantes(Palestrante model);
-        Task<Palestrante> UpdatePalestrantes(int palestranteId, Palestrante model);
+        Task<PalestranteDto> AddPalestrantes(PalestranteDto model);
+        Task<PalestranteDto> UpdatePalestrantes(int palestranteId, PalestranteDto model);
         Task<bool> DeletePalestrantes(int palestranteId);
         
-        Task<Palestrante[]> GetAllPalestrantesAsync(bool includeEventos = false);
-        Task<Palestrante[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos = false);
-        Task<Palestrante> GetPalestranteByIdAsync(int palestranteId, bool includeEventos = false);
+        Task<PalestranteDto[]> GetAllPalestrantesAsync(bool includeEventos = false);
+        Task<PalestranteDto[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos = false);
+        Task<PalestranteDto> GetPalestranteByIdAsync(int palestranteId, bool includeEventos = false);
     }
 }

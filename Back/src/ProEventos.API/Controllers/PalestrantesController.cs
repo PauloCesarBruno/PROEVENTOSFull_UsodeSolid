@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProEventos.Application.Contratos;
+using ProEventos.Application.Dtos;
 using ProEventos.Domain;
 
 namespace ProEventos.API.Controllers
@@ -24,7 +25,7 @@ namespace ProEventos.API.Controllers
             try
             {
                 var palestrantes = await _palestranteService.GetAllPalestrantesAsync(true);
-                if (palestrantes == null) return NotFound("Nenhum palestrantes encontrado !");
+                if (palestrantes == null) NoContent();
 
                 return Ok(palestrantes);
             }
@@ -42,7 +43,7 @@ namespace ProEventos.API.Controllers
             try
             {
                 var palestrantes = await _palestranteService.GetPalestranteByIdAsync(id, true);
-                if (palestrantes == null) return NotFound("Palestrante(s) por Código(Id) não encontrado(s) !");
+                if (palestrantes == null) NoContent();
 
                 return Ok(palestrantes);
             }
@@ -60,7 +61,7 @@ namespace ProEventos.API.Controllers
             try
             {
                 var palestrantes = await _palestranteService.GetAllPalestrantesByNomeAsync(nome, true);
-                if (palestrantes == null) return NotFound("Palestrante(s) por tema não encontrado(s) !");
+                if (palestrantes == null) NoContent();
 
                 return Ok(palestrantes);
             }
@@ -73,12 +74,12 @@ namespace ProEventos.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Palestrante model)
+        public async Task<IActionResult> Post(PalestranteDto model)
         {
             try
             {
                 var palestrante = await _palestranteService.AddPalestrantes(model);
-                if (palestrante == null) return BadRequest("Erro ao tentar adicionar palestrante !");
+                if (palestrante == null) NoContent();
 
                 return Ok(palestrante);
             }
@@ -91,12 +92,12 @@ namespace ProEventos.API.Controllers
         }
 
         [HttpPut("{Id}")]
-        public async Task <IActionResult> Put(int Id, Palestrante model)
+        public async Task <IActionResult> Put(int Id, PalestranteDto model)
         {
             try
             {
                 var palestrante = await _palestranteService.UpdatePalestrantes(Id, model);
-                if (palestrante == null) return BadRequest("Erro ao tentar alterar palestrante !");
+                if (palestrante == null) NoContent();
 
                 return Ok(palestrante);
             }
@@ -113,9 +114,13 @@ namespace ProEventos.API.Controllers
         {
             try
             {
+            
+            var palestrante = await _palestranteService.GetPalestranteByIdAsync(Id, true);
+            if (palestrante == null) NoContent();
+
              return await _palestranteService.DeletePalestrantes(Id) ? 
                     Ok("Deletado com sucesso !") : 
-                    BadRequest("Palestrante não pode ser deletado !");            
+                     throw new Exception("Ocorreu um problema não especifico ao tentar deletar Palestrante !");           
                                    
             }
             catch (Exception ex)
