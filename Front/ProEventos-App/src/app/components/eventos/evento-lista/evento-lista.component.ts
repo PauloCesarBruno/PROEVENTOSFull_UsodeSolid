@@ -5,7 +5,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Evento } from '@app/model/Evento';
 import { EventoService } from '@app/services/evento.service';
-
 @Component({
   selector: 'app-evento-lista',
   templateUrl: './evento-lista.component.html',
@@ -16,6 +15,10 @@ export class EventoListaComponent implements OnInit {
   modalRef: BsModalRef | any;
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
+
+  public eventoId = 0;
+
+
   public larguraImagem: number = 100;
   public margemImagem: number = 2;
   public exibirImagem: boolean = true;
@@ -60,7 +63,7 @@ export class EventoListaComponent implements OnInit {
       next: (eventos: Evento[]) => {
         this.eventos = eventos;
         this.eventosFiltrados = this.eventos;
-      },
+    },
     error: (_error: any) => {
       this.spinner.hide();
       this.toastr.error('Erro ao carregar os eventos !', 'Erro');
@@ -69,7 +72,9 @@ export class EventoListaComponent implements OnInit {
     });
   }
 
-  openModal(template: TemplateRef<any>): void {
+  openModal(event: any, template: TemplateRef<any>, eventoId: number): void {
+    event.stopPropagation();
+    this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 

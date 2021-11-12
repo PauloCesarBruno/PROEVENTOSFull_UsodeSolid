@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProEventos.Domain
 {    // Data Anotation de EF.Core para diferenciar meu codigo da Tabela do Banco de Dados, caso tenham nome diferentes.
@@ -8,6 +9,8 @@ namespace ProEventos.Domain
     {       
         public int Id { get; set; }
         public string Local { get; set; }
+
+        [DataType(DataType.DateTime)]
         public DateTime? DataEvento { get; set; }
         public string Tema { get; set; }
         public int QtdPessoas { get; set; }       
