@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
  // { providedIn: 'root'} --> Injetado no app.module em Providers....
  )
 export class EventoService {
-  baseURL = 'https://localhost:5001/api/eventos';
+  baseURL = 'http://localhost:5000/api/eventos';
 
   constructor(private http: HttpClient) { }
 
