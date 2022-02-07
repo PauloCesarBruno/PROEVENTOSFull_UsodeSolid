@@ -25,7 +25,6 @@ namespace ProEventos.Persistence.Contextos
                 .OnDelete(DeleteBehavior.Cascade);
 
         // PARA DELEÇÃO EM CASCATA (Para Palestrantes):
-
                  modelBuilder.Entity<Palestrante>()
                 .HasMany(p => p.RedesSociais)
                 .WithOne(rs => rs.Palestrante)

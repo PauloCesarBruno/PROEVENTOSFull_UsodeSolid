@@ -8,8 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Evento } from '@app/model/Evento';
 import { EventoService } from '@app/services/evento.service';
-import { isDateValid } from 'ngx-bootstrap/chronos';
-import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -47,6 +45,19 @@ export class EventoDetalheComponent implements OnInit {
        this.localeService.use('pt-br');
    }
 
+   public validation(): void {
+
+    this.form = this.fb.group({
+      tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+      local: ['', Validators.required],
+      dataEvento: ['', Validators.required],
+      qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
+      telefone: ['', Validators.required],
+      email: ['',[Validators.required, Validators.email]],
+      imagemURL: ['', Validators.required],
+    });
+  }
+
    public carregarEvento(): void {
      const eventoIdParam =  this.router.snapshot.paramMap.get('id');
 
@@ -74,19 +85,6 @@ export class EventoDetalheComponent implements OnInit {
   ngOnInit(): void {
     this.carregarEvento();
     this.validation();
-  }
-
-  public validation(): void {
-
-    this.form = this.fb.group({
-      tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-      local: ['', Validators.required],
-      dataEvento: ['', Validators.required],
-      qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
-      telefone: ['', Validators.required],
-      email: ['',[Validators.required, Validators.email]],
-      imagemURL: ['', Validators.required],
-    });
   }
 
   public resetForm(): void {
